@@ -1,0 +1,8 @@
+# Render blueprint: deploys the relay in server/ as a free web service.
+services:
+  - type: web
+    name: ptt-relay
+    runtime: docker
+    plan: free
+    rootDir: server
+    healthCheckPath: /
