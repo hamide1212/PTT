@@ -6,3 +6,4 @@ android/app/build/
 android/local.properties
 android/.kotlin/
 *.apk
+server/relay.log

@@ -1,7 +1,6 @@
 package com.pttradio
 
 import android.content.Context
-import android.os.Build
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
@@ -42,10 +41,8 @@ class Store(ctx: Context) {
 
     companion object {
         /** Relay address used until one is set in Settings. Change this to your deployed relay. */
-        const val DEFAULT_SERVER = "ws://192.168.11.114:8080"
+        const val DEFAULT_SERVER = "wss://hamide.tailac2f38.ts.net"
 
-        // On the emulator the host PC is reachable at 10.0.2.2, not at its LAN address.
-        fun defaultServer(): String =
-            if (Build.HARDWARE == "ranchu" || Build.HARDWARE == "goldfish") "ws://10.0.2.2:8080" else DEFAULT_SERVER
+        fun defaultServer(): String = DEFAULT_SERVER
     }
 }
