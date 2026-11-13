@@ -7,3 +7,4 @@ android/local.properties
 android/.kotlin/
 *.apk
 server/relay.log
+cloudflare/.wrangler/

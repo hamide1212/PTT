@@ -21,7 +21,7 @@ class Store(ctx: Context) {
         set(v) = p.edit().putString("callsign", v).apply()
 
     var server: String
-        get() = p.getString("server", null) ?: defaultServer()
+        get() = p.getString("server", null)?.takeUnless { it in RETIRED_SERVERS } ?: defaultServer()
         set(v) = p.edit().putString("server", v).apply()
 
     var selected: String?
@@ -41,7 +41,10 @@ class Store(ctx: Context) {
 
     companion object {
         /** Relay address used until one is set in Settings. Change this to your deployed relay. */
-        const val DEFAULT_SERVER = "wss://hamide.tailac2f38.ts.net"
+        const val DEFAULT_SERVER = "wss://ptt-relay.ptt-relay-cloudflare.workers.dev"
+
+        /** Earlier relay addresses: phones that saved one of these move to the default on update. */
+        private val RETIRED_SERVERS = setOf("wss://hamide.tailac2f38.ts.net", "ws://127.0.0.1:8080", "ws://192.168.11.114:8080")
 
         fun defaultServer(): String = DEFAULT_SERVER
     }

@@ -13,7 +13,9 @@ function client(id, name) {
   c.last = t => [...c.msgs].reverse().find(m => m.t === t);
   return c;
 }
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+// SLOW=5 stretches every wait, for relays reached over the internet instead of localhost.
+const SLOW = +process.env.SLOW || 1;
+const sleep = ms => new Promise(r => setTimeout(r, ms * SLOW));
 let failed = 0;
 function check(label, ok) {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${label}`);
