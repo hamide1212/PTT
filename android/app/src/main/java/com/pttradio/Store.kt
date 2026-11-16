@@ -41,10 +41,10 @@ class Store(ctx: Context) {
 
     companion object {
         /** Relay address used until one is set in Settings. Change this to your deployed relay. */
-        const val DEFAULT_SERVER = "wss://ptt-relay.ptt-relay-cloudflare.workers.dev"
+        const val DEFAULT_SERVER = "wss://hamide.tailac2f38.ts.net"
 
         /** Earlier relay addresses: phones that saved one of these move to the default on update. */
-        private val RETIRED_SERVERS = setOf("wss://hamide.tailac2f38.ts.net", "ws://127.0.0.1:8080", "ws://192.168.11.114:8080")
+        private val RETIRED_SERVERS = setOf("wss://ptt-relay.ptt-relay-cloudflare.workers.dev", "ws://127.0.0.1:8080", "ws://192.168.11.114:8080")
 
         fun defaultServer(): String = DEFAULT_SERVER
     }
