@@ -9,7 +9,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.pttradio"
+        applicationId = "com.pttradio.myapp" // the permanent Google Play identity; code stays in com.pttradio
         minSdk = 29 // Opus encoding through MediaCodec needs Android 10
         targetSdk = 35
         versionCode = 1
@@ -41,4 +41,5 @@ dependencies {
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.android.gms:play-services-ads:23.6.0")
 }

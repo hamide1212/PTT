@@ -81,6 +81,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.viewinterop.AndroidView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import kotlin.concurrent.thread
 import kotlinx.coroutines.launch
 
 private val Bg = Color(0xFF0B0F0A)
@@ -99,6 +106,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         Radio.init(applicationContext)
+        thread { MobileAds.initialize(applicationContext) }
         handleInvite(intent)
         setContent {
             MaterialTheme(
@@ -164,7 +172,12 @@ private fun App() {
     Scaffold(
         containerColor = Bg,
         snackbarHost = { SnackbarHost(snack) },
-        topBar = { Header(s, onSettings = { dialog = Dialog.Settings }) },
+        topBar = {
+            Column {
+                Header(s, onSettings = { dialog = Dialog.Settings })
+                AdBanner()
+            }
+        },
         bottomBar = {
             PttPanel(s, onNeedMic = { askPermissions.launch(arrayOf(Manifest.permission.RECORD_AUDIO)) })
         },
@@ -290,6 +303,23 @@ private fun Header(s: RadioState, onSettings: () -> Unit) {
         }
         IconButton(onSettings) { Icon(Icons.Default.Settings, "Settings", tint = Dim) }
     }
+}
+
+/** Banner ad under the header: kept away from the PTT button so it is never tapped by accident. */
+@Composable
+private fun AdBanner() {
+    val widthDp = LocalConfiguration.current.screenWidthDp
+    AndroidView(
+        modifier = Modifier.fillMaxWidth(),
+        factory = { ctx ->
+            AdView(ctx).apply {
+                setAdSize(AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(ctx, widthDp))
+                adUnitId = ctx.getString(R.string.admob_banner_id)
+                loadAd(AdRequest.Builder().build())
+            }
+        },
+        onRelease = { it.destroy() },
+    )
 }
 
 @Composable

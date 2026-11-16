@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        AdMob identifiers. These are Google's public TEST ids: they always show a "Test Ad" and earn nothing.
+        Replace both with the ids from your own AdMob account (apps.admob.com) before releasing:
+          admob_app_id    : Apps > your app > App settings > App ID       (ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY)
+          admob_banner_id : Apps > your app > Ad units > your banner unit (ca-app-pub-XXXXXXXXXXXXXXXX/ZZZZZZZZZZ)
+    -->
+    <string name="admob_app_id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_banner_id" translatable="false">ca-app-pub-3940256099942544/9214589741</string>
+</resources>
